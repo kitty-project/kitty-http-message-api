@@ -21,6 +21,10 @@ import java.util.Set;
  * @author Julian Jupiter
  */
 public record HttpHeader(String name, Set<String> values) {
+    public HttpHeader(String name, String value) {
+        this(name, Set.of(value));
+    }
+
     @Override
     public String toString() {
         return name + ": " + String.join(";", values);
