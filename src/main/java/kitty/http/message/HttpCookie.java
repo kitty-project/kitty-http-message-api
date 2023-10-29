@@ -15,33 +15,14 @@
  */
 package kitty.http.message;
 
-import java.util.List;
-
 /**
  * @author Julian Jupiter
  */
-public non-sealed interface HttpResponse extends HttpMessage {
-    HttpStatusLine statusLine();
-
-    HttpResponse status(int statusCode);
-
-    HttpResponse status(HttpStatus status);
-
-    HttpResponse header(String name, String value);
-
-    HttpResponse header(HttpHeader header);
-
-    HttpResponse headers(List<HttpHeader> headers);
-
-    List<HttpSetCookie> cookies();
-
-    HttpResponse cookie(String name, String value);
-
-    HttpResponse cookie(HttpSetCookie cookie);
-
-    HttpResponse cookies(List<HttpSetCookie> cookies);
-
-    HttpResponse body(String body);
-
-    void next();
+public record HttpCookie(
+        String name,
+        String value) {
+    @Override
+    public String toString() {
+        return this.name + "=" + this.value;
+    }
 }

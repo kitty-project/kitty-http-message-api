@@ -15,9 +15,16 @@
  */
 package kitty.http.message;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * @author Julian Jupiter
  */
 public non-sealed interface HttpRequest extends HttpMessage {
     HttpRequestLine requestLine();
+
+    List<HttpCookie> cookies();
+
+    Optional<HttpCookie> get(String name);
 }
