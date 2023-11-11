@@ -25,8 +25,12 @@ public record HttpHeader(String name, Set<String> values) {
         this(name, Set.of(value));
     }
 
+    public String value() {
+        return String.join(";", values);
+    }
+
     @Override
     public String toString() {
-        return name + ": " + String.join(";", values);
+        return name + ": " + this.value();
     }
 }
