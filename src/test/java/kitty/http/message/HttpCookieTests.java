@@ -15,22 +15,20 @@
  */
 package kitty.http.message;
 
-import java.util.Set;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
 
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, Set<String> values) {
-    public HttpHeader(String name, String value) {
-        this(name, Set.of(value));
-    }
-
-    public String value() {
-        return String.join(";", values);
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + this.value();
+class HttpCookieTests {
+    @Test
+    void createHttpCookie() {
+        var appId = UUID.randomUUID().toString();
+        var cookie = new HttpCookie("appId", appId);
+        Assertions.assertEquals(appId, cookie.value());
+        Assertions.assertEquals(String.format("appId=%s", appId), cookie.toString());
     }
 }

@@ -34,7 +34,7 @@ public record HttpSetCookie(
         SameSite sameSite,
         boolean partitioned) {
     public HttpSetCookie(String name, String value) {
-        this(name, value, "localhost", "/", OffsetDateTime.now(), 0, false, true, SameSite.NONE, false);
+        this(name, value, "localhost", "/", null, 0, false, true, SameSite.NONE, false);
     }
 
     public HttpSetCookie value(String value) {
@@ -75,19 +75,20 @@ public record HttpSetCookie(
 
     @Override
     public String toString() {
+        var expiresNotNull = this.expires != null;
         return String.format("%s=%s; " +
                         "domain=%s; " +
                         "path=%s; " +
-                        "expires=%s; " +
+                        "%s" +
                         "maxAge=%d; " +
                         "size=%d; " +
                         "httpOnly=%b; " +
                         "secure=%b; " +
                         "sameSite=%s; " +
                         "partitioned=%b",
-                this.name, this.value, this.domain,
-                this.path, this.expires, this.maxAge,
-                this.value.getBytes().length, this.httpOnly,
+                this.name, this.value, this.domain, this.path,
+                (expiresNotNull ? "expires=" + this.expires + "; " : ""),
+                this.maxAge, this.value.getBytes().length, this.httpOnly,
                 this.secure, this.sameSite, this.partitioned
         );
     }

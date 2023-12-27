@@ -15,22 +15,18 @@
  */
 package kitty.http.message;
 
-import java.util.Set;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.UUID;
 
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, Set<String> values) {
-    public HttpHeader(String name, String value) {
-        this(name, Set.of(value));
-    }
-
-    public String value() {
-        return String.join(";", values);
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + this.value();
+class HttpVersionTests {
+    @Test
+    void createHttpVersion() {
+        var version = HttpVersion.of("HTTP/1.1");
+        Assertions.assertEquals("HTTP/1.1", version.toString());
     }
 }

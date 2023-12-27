@@ -15,22 +15,22 @@
  */
 package kitty.http.message;
 
-import java.util.Set;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.net.URI;
 
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, Set<String> values) {
-    public HttpHeader(String name, String value) {
-        this(name, Set.of(value));
-    }
-
-    public String value() {
-        return String.join(";", values);
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + this.value();
+class HttpRequestLineTests {
+    @Test
+    void createHttpRequestLine() {
+        var target = URI.create("/users");
+        var requestLine = new HttpRequestLine(HttpMethod.GET, target, HttpVersion.HTTP_1_1);
+        Assertions.assertEquals(HttpMethod.GET, requestLine.method());
+        Assertions.assertEquals(URI.create("/users"), requestLine.target());
+        Assertions.assertEquals(HttpVersion.HTTP_1_1, requestLine.version());
+        Assertions.assertEquals("GET /users HTTP/1.1", requestLine.toString());
     }
 }

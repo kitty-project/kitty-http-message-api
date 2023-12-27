@@ -15,22 +15,18 @@
  */
 package kitty.http.message;
 
-import java.util.Set;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, Set<String> values) {
-    public HttpHeader(String name, String value) {
-        this(name, Set.of(value));
-    }
-
-    public String value() {
-        return String.join(";", values);
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + this.value();
+class HttpHeaderTests {
+    @Test
+    void createHttpHeader() {
+        var header = new HttpHeader("Content-Type", "application/json; charset=utf-8");
+        Assertions.assertEquals("Content-Type", header.name());
+        Assertions.assertEquals("application/json; charset=utf-8", header.value());
+        Assertions.assertEquals("Content-Type: application/json; charset=utf-8", header.toString());
     }
 }

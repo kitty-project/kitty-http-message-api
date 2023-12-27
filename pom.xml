@@ -7,11 +7,66 @@
     <groupId>kitty</groupId>
     <artifactId>kitty-http-message-api</artifactId>
     <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>Kitty HTTP Message API</name>
+    <description>HTTP message interfaces</description>
+    <url>https://kitty-project.github.io</url>
+
+    <licenses>
+        <license>
+            <name>Apache License</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Julian Jupiter</name>
+            <url>https://julianjupiter.com</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/kitty-project/kitty-http-message-api</url>
+        <connection>scm:git:ssh://git@github.com/kitty-project/kitty-http-message-api.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/kitty-project/kitty-http-message-api.git</developerConnection>
+    </scm>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.bom.version>5.10.1</junit.bom.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -15,22 +15,18 @@
  */
 package kitty.http.message;
 
-import java.util.Set;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, Set<String> values) {
-    public HttpHeader(String name, String value) {
-        this(name, Set.of(value));
-    }
-
-    public String value() {
-        return String.join(";", values);
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + this.value();
+class HttpStatusLineTests {
+    @Test
+    void createHttpStatusLine() {
+        var statusLine = new HttpStatusLine(HttpVersion.HTTP_1_1, HttpStatus.OK);
+        Assertions.assertEquals(HttpVersion.HTTP_1_1, statusLine.version());
+        Assertions.assertEquals(HttpStatus.OK, statusLine.status());
+        Assertions.assertEquals("HTTP/1.1 200 OK", statusLine.toString());
     }
 }
