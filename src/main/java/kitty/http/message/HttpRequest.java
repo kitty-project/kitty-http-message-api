@@ -26,5 +26,5 @@ public non-sealed interface HttpRequest extends HttpMessage {
 
     List<HttpCookie> cookies();
 
-    Optional<HttpCookie> get(String name);
+    Optional<HttpCookie> cookie(String name);
 }
